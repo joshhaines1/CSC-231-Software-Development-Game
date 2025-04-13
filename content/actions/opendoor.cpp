@@ -4,8 +4,20 @@
 #include "entity.h"
 #include "updatefov.h"
 
+OpenDoor::OpenDoor(Door& door)
+    :door{door}{
+
+}
+
+
+
 Result OpenDoor::perform(Engine& engine, std::shared_ptr<Entity> entity)
 {
+
+    door.open();
+    engine.events.create_event<UpdateFOV>();
+    return success();
+    /*
     Vec position = entity->get_position();
     bool opened_any_doors = false;
     for (Vec neighbor : engine.dungeon.neighbors(position))
@@ -17,15 +29,17 @@ Result OpenDoor::perform(Engine& engine, std::shared_ptr<Entity> entity)
             tile.door->open();
             tile.walkable = true;
             opened_any_doors = true;
+            break;
         }
     }
+
 
     //Update FOV after closing door
     if (opened_any_doors)
     {
-        engine.events.create_event<UpdateFOV>();
-        return success();
+
     }
+    */
 
     return failure();
 }

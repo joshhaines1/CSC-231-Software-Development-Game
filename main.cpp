@@ -3,6 +3,8 @@
 #include "monsters.h"
 #include <iostream>
 #include "entity.h"
+#include "randomness.h"
+#include <random>
 
 int main() {
     try {
@@ -13,9 +15,22 @@ int main() {
         Heroes::make_wizard(hero);
         for (int i = 0; i < 40; i++)
         {
-
             std::shared_ptr<Entity> monster = engine.create_monster();
-            Monsters::make_demon(monster);
+            int random_number = (std::rand() % (100 - 0 + 1)) + 0;
+            if (random_number <= 33) {
+
+                Monsters::make_necromancer(monster);
+
+            } else if (random_number <= 66){
+
+                Monsters::make_demon(monster);
+
+            } else {
+
+                Monsters::make_skeleton(monster);
+
+            }
+
 
         }
 

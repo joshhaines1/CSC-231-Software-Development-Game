@@ -1,4 +1,7 @@
 #include "move.h"
+
+#include <iostream>
+
 #include "engine.h"
 #include "entity.h"
 #include "opendoor.h"
@@ -11,14 +14,15 @@ Move::Move(Vec direction)
 
 Result Move::perform(Engine& engine, std::shared_ptr<Entity> entity) {
     entity->change_direction(direction);
-    if (engine.dungeon.get_tile(entity->get_position() + direction).walkable)
+    Tile& tile = engine.dungeon.get_tile(entity->get_position() + direction);
+    if (engine.dungeon.get_tile(entity->get_position() + direction).walkable || tile.has_door() && tile.door->is_open())
     {
         entity->move_to(entity->get_position() + direction);
         return success();
 
     } else if (engine.dungeon.get_tile(entity->get_position() + direction).has_door() && !engine.dungeon.get_tile(entity->get_position() + direction).door->is_open())
     {
-        return alternative(OpenDoor{});
+        return alternative(OpenDoor{*tile.door});
     } else
     {
         return failure();
