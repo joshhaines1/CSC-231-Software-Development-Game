@@ -47,11 +47,6 @@ namespace Heroes {
         {
             return std::make_unique<CloseDoor>();
 
-        } else if (key == "O")
-        {
-
-            return std::make_unique<OpenDoor>();
-
         }
         return nullptr;
     }
