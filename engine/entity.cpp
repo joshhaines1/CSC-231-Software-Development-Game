@@ -58,6 +58,15 @@ bool Entity::is_visible() const {
     return tile.is_visible();
 }
 
+
+void Entity::set_speed(int speed) {
+    speed = std::clamp(speed, minimum_speed, maximum_speed);
+}
+
+[[nodiscard]] int Entity::get_speed() const {
+    return speed;
+}
+
 void Entity::take_damage(int amount) {
     health -= amount;
     health = std::clamp(health, 0, max_health);
@@ -115,7 +124,14 @@ std::shared_ptr<Item> Entity::get_current_item() const {
     }
 }
 
+void Entity::switch_to_next_item() {
+    current_item = (current_item + 1) % max_inventory;
+}
+
 void Entity::select_item(int index) {
+    // assumes 1-5 is passed in, convert to an index
+    --index;
+    
     // ensure valid index within inventory
     if (0 <= index && index < max_inventory) {
         current_item = index;

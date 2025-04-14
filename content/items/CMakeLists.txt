@@ -1,5 +1,8 @@
 add_library(items
-  bite.cpp
+        bite.h
+        bite.cpp
+        potion.cpp
+        potion.h
 )
 
 target_include_directories(items PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

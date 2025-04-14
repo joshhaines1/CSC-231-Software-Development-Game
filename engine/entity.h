@@ -11,7 +11,8 @@ class Engine;
 class Action;
 class Item;
 
-constexpr int default_speed{8}, max_inventory{5};
+constexpr int minimum_speed{1}, default_speed{8}, maximum_speed{64};
+constexpr int max_inventory{5};
 enum class Team { Hero, Monster };
 
 // base class for all interacting beings
@@ -25,6 +26,9 @@ public:
     [[nodiscard]] Vec get_direction() const;
     void change_direction(Vec new_direction);
     [[nodiscard]] bool is_visible() const;
+
+    void set_speed(int speed);
+    [[nodiscard]] int get_speed() const;
 
     // functions to be called after move_to is called
     std::vector<std::function<void(Engine& engine, Entity& entity)>> on_move;
@@ -41,6 +45,7 @@ public:
     [[nodiscard]] bool is_inventory_full() const;
     void add_to_inventory(std::shared_ptr<Item> item);
     [[nodiscard]] std::shared_ptr<Item> get_current_item() const;
+    void switch_to_next_item();
     void select_item(int index);
     void remove_item(Item* item);
     std::shared_ptr<Item> remove_item(int index);

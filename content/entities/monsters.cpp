@@ -35,7 +35,7 @@ namespace Monsters {
 
     std::unique_ptr<Action> default_behavior(Engine& engine, Entity& entity)
     {
-        if (entity.is_visible() && engine.hero && probability(66)) {
+        if (entity.is_visible() && engine.hero) {
 
             std::vector<Vec> path = engine.dungeon.calculate_path(entity.get_position(), engine.hero->get_position());
             if (path.size() > 1) { // At least one tile away
