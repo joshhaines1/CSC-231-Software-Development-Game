@@ -14,6 +14,7 @@
 #include "opendoor.h"
 #include "staff_red.h"
 #include "use.h"
+#include "knife.h"
 
 namespace Heroes {
 
@@ -23,6 +24,7 @@ namespace Heroes {
         hero->behavior = default_behavior;
         hero->add_to_inventory(std::make_shared<Potion>(2));
         hero->add_to_inventory(std::make_shared<RedStaff>(2));
+        hero->add_to_inventory(std::make_shared<Knife>(1));
     }
     std::unique_ptr<Action> default_behavior(Engine& engine, Entity& entity)
     {
