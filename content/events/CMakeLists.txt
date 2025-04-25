@@ -6,6 +6,10 @@ add_library(events
         die.h
         thrust.cpp
         thrust.h
+        raise.cpp
+        raise.h
+        swing.cpp
+        swing.h
 )
 
 target_include_directories(events PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

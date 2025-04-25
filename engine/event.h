@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <iostream>
 
 // forward declaration
 class Engine;
@@ -27,13 +28,19 @@ public:
     virtual void when_done(Engine& engine);
 
     // add events that will take place after this current one
-    template <typename T>
-    void add_next(T&& event) {
-        next_events.push_back(std::make_shared<T>(std::forward<T>(event)));
+    template <typename T, typename... Args>
+    void add_next(Args&&... args) {
+        static_assert(std::is_base_of<Event, T>::value, "T must derive from Event");
+        auto event = std::make_shared<T>(std::forward<Args>(args)...);
+        if (!event) {
+            std::cerr << "Event::add_next(): tried to add nullptr\n";
+        }
+        next_events.push_back(event);
     }
+
     // ignore clang-tidy's recommendation for pass by const ref and pass by value,
     // otherwise calling add_next(shared_ptr<Event>) matches add_next(T&& Event) (compile error)
-    void add_next(std::shared_ptr<Event>& event) {
+    void add_next(std::shared_ptr<Event> event) {
         next_events.push_back(event);
     }
     

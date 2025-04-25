@@ -21,6 +21,7 @@ Thrust::Thrust(Sprite& sprite, Vec direction)
 }
 
 void Thrust::execute(Engine& engine) {
+
     sprite.shift += direction * delta;
 }
 

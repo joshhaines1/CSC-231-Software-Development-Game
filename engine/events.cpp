@@ -1,7 +1,7 @@
 #include "events.h"
 #include <algorithm>
 
-void Events::add(std::shared_ptr<Event> event) {
+void Events::add(const std::shared_ptr<Event>& event) {
     events.push_back(event);
 }
 
@@ -14,24 +14,33 @@ void Events::execute(Engine& engine) {
     // run. Collect those in here, then add them to the event queue.
     std::vector<std::shared_ptr<Event>> next_events;
     
+    // make a copy since event->execute() or event->when_done() could
+    // modify events by adding new ones
+    auto current_events = events;
+
     // process all current events
-    // keep as pass by value, segfaults rarely happen
-    // when iterating by const ref
-    for (std::shared_ptr<Event> event : events) {
+    for (const auto& event : current_events) {
         event->execute(engine);
         event->update();
+        
         if (event->is_done()) {
             event->when_done(engine); // event clean-up
+
             // collect any next events
-            std::copy(std::begin(event->next_events), std::end(event->next_events),
-                      std::back_inserter(next_events));
+            next_events.insert(next_events.end(),
+                               std::make_move_iterator(event->next_events.begin()),
+                               std::make_move_iterator(event->next_events.end()));
+            // event->next_events is full of nullptr's, get rid of them
+            event->next_events = {}; 
         }
     }
 
     remove_done_events();
 
     // add any new events to event queue
-    std::copy(std::begin(next_events), std::end(next_events), std::back_inserter(events));
+    events.insert(events.end(),
+                  std::make_move_iterator(next_events.begin()),
+                  std::make_move_iterator(next_events.end()));
 }
 
 bool Events::empty() const {

@@ -33,7 +33,6 @@ Result Move::perform(Engine& engine, std::shared_ptr<Entity> entity) {
 
         if (tile.entity->get_team() != entity->get_team())
         {
-            std::cout << "Should attack";
             return alternative(Attack{*tile.entity});
 
         }

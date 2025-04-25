@@ -21,7 +21,7 @@ void Hit::execute(Engine& engine) {
 void Hit::when_done(Engine& engine) {
     if (!entity.is_alive()) {
 
-        add_next(Die{entity});
+        add_next<Die>(entity);
 
     }
 }
