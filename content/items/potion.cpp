@@ -11,5 +11,6 @@ Potion::Potion(int healing_amount)
 
 void Potion::use(Engine& engine, Entity& owner) {
     owner.take_damage(healing_amount);
+    owner.remove_item(owner.get_current_item().get());
 }
 

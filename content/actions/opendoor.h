@@ -7,7 +7,6 @@ class OpenDoor : public Action
 {
 public:
     explicit OpenDoor(Door& door);
-    OpenDoor();
     Result perform(Engine& engine, std::shared_ptr<Entity> entity) override;
 private:
     Door& door;

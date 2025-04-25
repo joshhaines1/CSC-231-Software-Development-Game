@@ -10,7 +10,6 @@ Result Use::perform(Engine& engine, std::shared_ptr<Entity> entity) {
     auto item = entity->get_current_item();
     if (item) {
         item->use(engine, *entity);
-        entity->remove_item(item.get());
         return success();
     } else {
 

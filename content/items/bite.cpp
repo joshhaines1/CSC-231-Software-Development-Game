@@ -1,7 +1,12 @@
 #include "bite.h"
 
-Bite::Bite(int damage)
-    :Item{"none"}, damage{damage} {}
+#include "hit.h"
+#include "staff_red.h"
+#include "engine.h"
 
-void Bite::use(Engine&, Entity&, Entity&) {
+Bite::Bite(int damage) :Item("none"), damage{damage}{}
+
+void Bite::use(Engine& engine, Entity& attacker, Entity& defender) {
+    engine.events.create_event<Hit>(defender, damage);
 }
+

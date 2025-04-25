@@ -1,35 +1,64 @@
 #include "monsters.h"
 #include <randomness.h>
+
+#include <iostream>
+
+#include "bite.h"
 #include "entity.h"
 #include "item.h"
 #include "rest.h"
 #include "wander.h"
 #include "engine.h"
+#include "knife.h"
 #include "move.h"
+#include "staff_red.h"
 
 namespace Monsters {
 
     void make_demon(std::shared_ptr<Entity> monster)
     {
         monster->set_sprite("demon_big");
-        monster->set_max_health(40);
+        monster->set_max_health(6);
         monster->behavior = default_behavior;
+        monster->add_to_inventory(std::make_shared<Bite>(3));
+
+
 
     }
 
     void make_necromancer(std::shared_ptr<Entity> monster)
     {
         monster->set_sprite("necromancer");
-        monster->set_max_health(25);
+        monster->set_max_health(4);
         monster->behavior = default_behavior;
+        int random_number = (std::rand() % (100 - 0 + 1)) + 0;
+        if (random_number <= 50) {
+
+            monster->add_to_inventory(std::make_shared<RedStaff>(2));
+
+        } else {
+
+            monster->add_to_inventory(std::make_shared<Bite>(1));
+
+        }
 
     }
 
     void make_skeleton(std::shared_ptr<Entity> monster)
     {
         monster->set_sprite("skeleton");
-        monster->set_max_health(30);
+        monster->set_max_health(2);
         monster->behavior = default_behavior;
+        int random_number = (std::rand() % (100 - 0 + 1)) + 0;
+        if (random_number <= 50) {
+
+            monster->add_to_inventory(std::make_shared<Knife>(2));
+
+        } else {
+
+            monster->add_to_inventory(std::make_shared<Bite>(1));
+
+        }
 
     }
 

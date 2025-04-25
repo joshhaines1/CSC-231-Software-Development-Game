@@ -11,6 +11,8 @@ add_library(actions
         wander.h
         use.cpp
         use.h
+        attack.cpp
+        attack.h
 )
 
 target_include_directories(actions PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,13 +1,13 @@
 #pragma once
-
 #include "item.h"
 
+class Knife : public Item {
 
-class Bite : public Item {
 public:
-    Bite(int damage);
+    Knife(int damage);
     void use(Engine& engine, Entity& attacker, Entity& defender) override;
 
 private:
     int damage;
+
 };
