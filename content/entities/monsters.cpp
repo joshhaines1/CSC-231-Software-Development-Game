@@ -31,8 +31,7 @@ namespace Monsters {
         monster->set_sprite("necromancer");
         monster->set_max_health(4);
         monster->behavior = default_behavior;
-        int random_number = (std::rand() % (100 - 0 + 1)) + 0;
-        if (random_number <= 50) {
+        if (probability(50)) {
 
             monster->add_to_inventory(std::make_shared<RedStaff>(2));
 
@@ -49,8 +48,7 @@ namespace Monsters {
         monster->set_sprite("skeleton");
         monster->set_max_health(2);
         monster->behavior = default_behavior;
-        int random_number = (std::rand() % (100 - 0 + 1)) + 0;
-        if (random_number <= 50) {
+        if (probability(50)) {
 
             monster->add_to_inventory(std::make_shared<Knife>(2));
 
