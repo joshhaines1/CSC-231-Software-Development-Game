@@ -22,6 +22,9 @@ public:
     // Returns the position of an unoccupied tile
     Vec random_open_room_tile() const;
 
+    // Returns the position of an unoccupied tile against a wall
+    Vec random_open_border_tile() const;
+
     // Update tile sprites or conditions
     void update();
 

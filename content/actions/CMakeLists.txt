@@ -13,6 +13,10 @@ add_library(actions
         use.h
         attack.cpp
         attack.h
+        openchest.cpp
+        openchest.h
+        drop.h
+        drop.cpp
 )
 
 target_include_directories(actions PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

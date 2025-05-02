@@ -1,13 +1,11 @@
 #pragma once
 #include "item.h"
 
-class Potion : public Item {
+class TeleportPotion : public Item {
 
 public:
-    Potion(int healing_amount);
+    TeleportPotion();
     void use(Engine& engine, Entity& owner) override;
     void interact(Engine& engine, Entity& entity) override;
-private:
-    int healing_amount;
 
 };

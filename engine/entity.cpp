@@ -10,6 +10,7 @@ Entity::Entity(Engine& engine, Vec position, Team team)
     : engine{engine},
       position{position},
       team{team},
+        original_team{team},
       inventory(max_inventory),
       current_item{0}{
 
@@ -92,8 +93,18 @@ void Entity::set_team(Team new_team) {
     team = new_team;
 }
 
+void Entity::set_original_team(Team new_team) {
+    team = new_team;
+}
+
 Team Entity::get_team() const {
     return team;
+}
+
+Team Entity::get_original_team() const {
+
+    return original_team;
+
 }
 
 bool Entity::is_inventory_full() const {

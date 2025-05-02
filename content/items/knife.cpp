@@ -2,6 +2,7 @@
 #include "knife.h"
 #include "engine.h"
 #include "entity.h"
+#include "pickup.h"
 #include "thrust.h"
 
 Knife::Knife(int damage) :Item("knife"), damage{damage}{}
@@ -11,4 +12,9 @@ void Knife::use(Engine& engine, Entity& attacker, Entity& defender) {
     auto thrust = engine.events.create_event<Thrust>(sprite, direction);
     thrust->add_next<Hit>(defender, damage);
 }
+
+void Knife::interact(Engine& engine, Entity& entity) {
+   engine.events.create_event<PickUp>(entity);
+}
+
 

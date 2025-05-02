@@ -6,8 +6,10 @@
 #include "builder.h"
 #include "decorator.h"
 #include "entity.h"
+#include "item.h"
 #include "settings.h"
 #include "timer.h"
+#include "../content/items/chest.h"
 
 Engine::Engine(const Settings& settings)
     :graphics{settings.title, settings.screen_width, settings.screen_height},
@@ -95,6 +97,18 @@ std::shared_ptr<Entity> Engine::create_monster() {
     entities.add(monster);
     return monster;
 }
+
+
+void Engine::create_item(std::shared_ptr<Item> item) {
+    Vec position = dungeon.random_open_room_tile();
+    Tile& tile = dungeon.get_tile(position);
+    tile.item = item;
+    //Add the sprite to the tile
+    auto sprite = graphics.get_sprite(item->name);
+    item->sprite = sprite;
+}
+
+
 
 void Engine::remove_entity(Entity& entity) {
     // remove from dungeon tile

@@ -9,6 +9,8 @@
 #include "input.h"
 #include "settings.h"
 
+class Chest;
+
 class Engine {
 public:
     explicit Engine(const Settings& settings);
@@ -16,6 +18,7 @@ public:
     // Add a hero or monster to the game
     std::shared_ptr<Entity> create_hero();
     std::shared_ptr<Entity> create_monster();
+    void create_item(std::shared_ptr<Item> item);
 
     // Remove entity from the game
     void remove_entity(Entity& entity);

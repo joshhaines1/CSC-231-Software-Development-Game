@@ -39,7 +39,9 @@ public:
     [[nodiscard]] std::pair<int, int> get_health() const; // returns health, max_health
     [[nodiscard]] bool is_alive() const;
     void set_team(Team new_team);
+    void set_original_team(Team new_team);
     [[nodiscard]] Team get_team() const;
+    [[nodiscard]] Team get_original_team() const;
 
     // managing items within the inventory
     [[nodiscard]] bool is_inventory_full() const;
@@ -61,6 +63,10 @@ public:
     void update();
     [[nodiscard]] std::vector<Sprite> get_sprites() const;
 
+    //used to track turns taken (for use with the shapeshifting potion)
+    int turns_left_in_shapeshift = 0;
+    std::string original_sprite_name;
+
 private:
     Engine& engine;
     AnimatedSprite sprite;
@@ -72,6 +78,7 @@ private:
     
     // teams can be used to determine who can attack whom
     Team team;
+    Team original_team;
 
     // speed is energy gain per turn, once an entity has enough energy
     // it can take a turn

@@ -10,6 +10,17 @@ add_library(events
         raise.h
         swing.cpp
         swing.h
+        animationevent.cpp
+        animationevent.h
+        pickup.cpp
+        pickup.h
+        audioevent.cpp
+        audioevent.h
+        changeteam.cpp
+        changeteam.h
+        teleport.cpp
+        teleport.h
+
 )
 
 target_include_directories(events PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

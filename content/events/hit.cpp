@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "die.h"
+#include "engine.h"
 #include "entity.h"
 
 Hit::Hit(Entity& entity, int damage)
@@ -15,7 +16,6 @@ Hit::Hit(Entity& entity, int damage)
 void Hit::execute(Engine& engine) {
     //Add an audio sound effect
     entity.take_damage(damage);
-    std::cout << entity.get_health().first;
 }
 
 void Hit::when_done(Engine& engine) {

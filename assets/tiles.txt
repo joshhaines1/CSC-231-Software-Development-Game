@@ -54,3 +54,5 @@ door_vertical 0 128 16 32
 
 torch 0 208 16 16 5
 
+
+

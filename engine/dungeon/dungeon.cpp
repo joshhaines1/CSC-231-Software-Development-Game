@@ -28,6 +28,38 @@ Vec Dungeon::random_open_room_tile() const {
     }
 }
 
+Vec Dungeon::random_open_border_tile() const {
+
+    while (true) {
+        Room room = random_choice(rooms);
+        int x = randint(room.position.x, room.position.x+room.size.x-1);
+        int y = randint(room.position.y, room.position.y+room.size.y-1);
+        const Tile& tile = tiles(x, y);
+        int surroundingWalls = 0;
+        std::vector<Tile> neighborTiles{
+            tiles(x + 1, y), //Right
+            tiles(x - 1, y), //Left
+            tiles(x, y + 1), //Top
+            tiles(x, y - 1), //Bottom
+            tiles(x + 1, y + 1), //Up Right
+            tiles(x - 1, y + 1), //Up Left
+            tiles(x + 1, y - 1), //Bottom Right
+            tiles(x - 1, y - 1), //Bottom Left
+
+        };
+        for (auto neighbor : neighborTiles) {
+            if (neighbor.is_wall()) {
+
+                surroundingWalls++;
+
+            }
+        }
+        if (tile.walkable && tile.entity == nullptr && tile.item == nullptr && surroundingWalls == 3) {
+            return {x, y};
+        }
+    }
+}
+
 void Dungeon::update() {
     for (auto& [position, animated_sprite] : decorations) {
         if (tiles(position).visible) {
