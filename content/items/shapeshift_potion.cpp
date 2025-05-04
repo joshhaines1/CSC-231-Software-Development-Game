@@ -4,6 +4,7 @@
 #include "shapeshift_potion.h"
 
 #include "animationevent.h"
+#include "audioevent.h"
 #include "changeteam.h"
 #include "engine.h"
 #include "entity.h"
@@ -17,9 +18,12 @@ void ShapeshiftPotion::use(Engine& engine, Entity& owner) {
     //Keeps track of the entity's original team
     owner.set_original_team(Team::Hero);
 
+    //Play sound
+    engine.audio.play_sound("shapeshift");
+
     /* Keeps track of how many moves the user has left
      * before it changes back */
-    owner.turns_left_in_shapeshift = 5;
+    owner.turns_left_in_shapeshift = 10;
 
     //Remove the potion and trigger the animation
     auto animation = engine.events.create_event<AnimationEvent>(owner.get_position(), "gas");
@@ -27,6 +31,7 @@ void ShapeshiftPotion::use(Engine& engine, Entity& owner) {
 
     //Changes team and sprite
     animation->add_next<ChangeTeam>(owner, false);
+
 
 }
 

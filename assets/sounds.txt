@@ -6,4 +6,6 @@ fire fire.mp3
 hit hit.wav
 metal-clang metal-clang.wav
 thunder thunder.mp3
+bubble bubble_pop.mp3
+shapeshift shapeshift.mp3
 

@@ -6,6 +6,7 @@
 #include "shapeshift_potion.h"
 
 #include "animationevent.h"
+#include "audioevent.h"
 #include "changeteam.h"
 #include "engine.h"
 #include "entity.h"
@@ -20,6 +21,8 @@ void TeleportPotion::use(Engine& engine, Entity& owner) {
 
     auto animation = engine.events.create_event<AnimationEvent>(owner.get_position(), "magic");
     animation->add_next<Teleport>(owner);
+    animation->add_next<AudioEvent>("bubble");
+
     owner.remove_item(owner.get_current_item().get());
 }
 

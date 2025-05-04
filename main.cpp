@@ -12,6 +12,7 @@
 #include "potion.h"
 #include "shapeshift_potion.h"
 #include "staff_red.h"
+#include "teleport_potion.h"
 
 int main() {
     try {
@@ -20,28 +21,33 @@ int main() {
         std::shared_ptr<Entity> hero = engine.create_hero();
         Heroes::make_wizard(hero);
 
+
         //Spawns ground loot
         for (int i = 0; i < 6; i++) {
 
-            if (probability(20)) {
+            if (probability(16)) {
 
                 engine.create_item(std::make_shared<RedStaff>(3));
 
-            } else if (probability(20)) {
+            } else if (probability(16)) {
 
                 engine.create_item(std::make_shared<Knife>(2));
 
-            } else if (probability(20)){
+            } else if (probability(16)){
 
                 engine.create_item(std::make_shared<Potion>(4));
 
-            }  else if (probability(20)){
+            }  else if (probability(16)){
 
                 engine.create_item(std::make_shared<ShapeshiftPotion>());
 
-            } else {
+            } else if (probability(16)){
 
                 engine.create_item(std::make_shared<Axe>(3));
+
+            } else {
+
+                engine.create_item(std::make_shared<TeleportPotion>());
 
             }
 
@@ -55,28 +61,32 @@ int main() {
                 Chest::create_chest(engine, std::make_shared<RedStaff>(3), true);
                 continue;
             }
-            if (probability(20)) {
+            if (probability(16)) {
 
                 Chest::create_chest(engine, std::make_shared<RedStaff>(3));
 
-            } else if (probability(20)) {
+            } else if (probability(16)) {
 
                 Chest::create_chest(engine, std::make_shared<Knife>(1));
 
 
-            } else if (probability(20)){
+            } else if (probability(16)){
 
                 Chest::create_chest(engine, std::make_shared<Potion>(4));
 
 
-            }  else if (probability(20)){
+            }  else if (probability(16)){
 
                 Chest::create_chest(engine, std::make_shared<ShapeshiftPotion>());
 
 
-            } else {
+            } else if (probability(16)){
 
                 Chest::create_chest(engine, std::make_shared<Axe>(3));
+
+            } else {
+
+                Chest::create_chest(engine, std::make_shared<TeleportPotion>());
 
             }
 

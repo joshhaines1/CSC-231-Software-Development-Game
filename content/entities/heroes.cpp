@@ -26,9 +26,9 @@ namespace Heroes {
         hero->original_sprite_name = "wizard";
         hero->set_max_health(20);
         hero->behavior = default_behavior;
-        hero->add_to_inventory(std::make_shared<Potion>(2));
-        hero->add_to_inventory(std::make_shared<RedStaff>(2));
-        hero->add_to_inventory(std::make_shared<Knife>(1));
+        hero->add_to_inventory(std::make_shared<Potion>(5));
+        hero->add_to_inventory(std::make_shared<RedStaff>(4));
+        hero->add_to_inventory(std::make_shared<Knife>(2));
         hero->add_to_inventory(std::make_shared<ShapeshiftPotion>());
         hero->add_to_inventory(std::make_shared<TeleportPotion>());
     }

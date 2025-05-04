@@ -36,6 +36,7 @@ Vec Dungeon::random_open_border_tile() const {
         int y = randint(room.position.y, room.position.y+room.size.y-1);
         const Tile& tile = tiles(x, y);
         int surroundingWalls = 0;
+        bool has_door = false;
         std::vector<Tile> neighborTiles{
             tiles(x + 1, y), //Right
             tiles(x - 1, y), //Left
@@ -53,6 +54,17 @@ Vec Dungeon::random_open_border_tile() const {
                 surroundingWalls++;
 
             }
+            if (neighbor.has_door()) {
+
+                has_door = true; ;
+                break;
+
+            }
+        }
+        if (has_door) {
+
+            continue;
+
         }
         if (tile.walkable && tile.entity == nullptr && tile.item == nullptr && surroundingWalls == 3) {
             return {x, y};
