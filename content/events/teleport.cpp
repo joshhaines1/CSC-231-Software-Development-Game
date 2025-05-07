@@ -13,7 +13,7 @@ Teleport::Teleport(Entity& entity)
 
 
 void Teleport::execute(Engine& engine) {
-    auto tile = engine.dungeon.random_open_border_tile();
+    auto tile = engine.dungeon.random_open_room_tile();
     entity.move_to(tile);
     engine.events.create_event<AnimationEvent>(tile, "magic");
 }

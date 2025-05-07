@@ -1,6 +1,5 @@
 #include "hit.h"
 #include "chest.h"
-
 #include "animationevent.h"
 #include "engine.h"
 #include "entity.h"

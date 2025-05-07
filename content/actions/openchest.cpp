@@ -4,6 +4,7 @@
 
 #include "openchest.h"
 
+#include "attack.h"
 #include "engine.h"
 #include "entity.h"
 #include "item.h"

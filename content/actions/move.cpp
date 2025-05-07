@@ -1,7 +1,4 @@
 #include "move.h"
-
-#include <iostream>
-
 #include "animationevent.h"
 #include "attack.h"
 #include "changeteam.h"
@@ -14,7 +11,6 @@
 
 Move::Move(Vec direction)
     :direction{direction}{
-
 }
 
 
@@ -51,16 +47,23 @@ Result Move::perform(Engine& engine, std::shared_ptr<Entity> entity) {
         return alternative(Rest{});
 
     }
-    if (tile.has_item() && tile.item->name == "chest" && (entity->get_team() == Team::Hero || entity->get_original_team() == Team::Hero))
+    if (tile.has_item() && tile.item->name == "chest")
     {
-        if (entity->get_team() != entity->get_original_team()) {
+        if ((entity->get_team() == Team::Hero || entity->get_original_team() == Team::Hero)) {
 
-            auto animation = engine.events.create_event<AnimationEvent>(entity->get_position(), "gas");
-            //Returns the entity to their original team
-            animation->add_next<ChangeTeam>(*entity, true);
+            if (entity->get_team() != entity->get_original_team()) {
 
+                auto animation = engine.events.create_event<AnimationEvent>(entity->get_position(), "gas");
+                //Returns the entity to their original team
+                animation->add_next<ChangeTeam>(*entity, true);
+
+            }
+            return alternative(OpenChest{*tile.item});
+
+        } else {
+
+            return alternative(Rest{});
         }
-        return alternative(OpenChest{*tile.item});
 
     }
 

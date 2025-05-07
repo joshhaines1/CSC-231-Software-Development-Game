@@ -39,9 +39,10 @@ public:
     [[nodiscard]] std::pair<int, int> get_health() const; // returns health, max_health
     [[nodiscard]] bool is_alive() const;
     void set_team(Team new_team);
-    void set_original_team(Team new_team);
     [[nodiscard]] Team get_team() const;
-    [[nodiscard]] Team get_original_team() const;
+
+    void set_original_team(Team new_team);  // <--- NEW
+    [[nodiscard]] Team get_original_team() const;  // <--- NEW
 
     // managing items within the inventory
     [[nodiscard]] bool is_inventory_full() const;
@@ -63,9 +64,9 @@ public:
     void update();
     [[nodiscard]] std::vector<Sprite> get_sprites() const;
 
-    //used to track turns taken (for use with the shapeshifting potion)
-    int turns_left_in_shapeshift = 0;
-    std::string original_sprite_name;
+    // * NEW *
+    int turns_left_in_shapeshift = 0; // Used to track turns taken since shape shifting potion was drank
+    std::string original_sprite_name; //Keeps track of the original sprite the player had
 
 private:
     Engine& engine;
